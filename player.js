@@ -13,6 +13,9 @@ class Player {
 
     update() {
         let moving = false;
+
+        this.speed = this.game.keys["shift"] ? 400 : 200;
+
         if (this.game.keys["w"] || this.game.keys["ArrowUp"]) {
             this.y -= this.speed * this.game.clockTick;
             this.animation = "up";

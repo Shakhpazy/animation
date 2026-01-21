@@ -20,5 +20,5 @@ body {
     display: flex;
     justify-content: center;
     text-align: left;
-    gap: 1em;
+    gap: 2em;
 }
