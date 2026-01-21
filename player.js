@@ -8,38 +8,39 @@ class Player {
         this.x = 0;
         this.y = 0;
         this.speed = 200;
+        this.animation = "idle";
     }
 
     update() {
+        let moving = false;
         if (this.game.keys["w"] || this.game.keys["ArrowUp"]) {
             this.y -= this.speed * this.game.clockTick;
+            this.animation = "up";
+            moving = true;
         }
         if (this.game.keys["s"] || this.game.keys["ArrowDown"]) {
             this.y += this.speed * this.game.clockTick;
+            this.animation = "down";
+            moving = true;
         }
         if (this.game.keys["a"] || this.game.keys["ArrowLeft"]) {
             this.x -= this.speed * this.game.clockTick;
+            this.animation = "left";
+            moving = true;
         }
         if (this.game.keys["d"] || this.game.keys["ArrowRight"]) {
             this.x += this.speed * this.game.clockTick;
+            this.animation = "right";
+            moving = true;
+        } 
+        if (!moving) {
+            this.animation = "idle";
         }
     }
 
+
     draw(ctx) {
-        if (this.game.keys["w"] || this.game.keys["ArrowUp"]) {
-            this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, "up");
-        }
-        else if (this.game.keys["s"] || this.game.keys["ArrowDown"]) {
-            this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, "down");
-        }
-        else if (this.game.keys["a"] || this.game.keys["ArrowLeft"]) {
-            this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, "left");
-        }
-        else if (this.game.keys["d"] || this.game.keys["ArrowRight"]) {
-            this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, "right");
-        } else {
-            this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, "idle");
-        }
+        this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.animation);
     }
 
 }
