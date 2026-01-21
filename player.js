@@ -3,7 +3,7 @@ class Player {
     constructor(game) {
         this.game = game
         this.animator = new Animator(
-            ASSET_MANAGER.getAsset("sprite.png"),0, 1570, 330, 375, 4, .3);
+            ASSET_MANAGER.getAsset("./sprite.png"),0, 1570, 330, 375, 4, .3);
         
         this.x = 0;
         this.y = 0;
