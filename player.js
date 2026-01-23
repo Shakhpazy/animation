@@ -15,29 +15,39 @@ class Player {
         let moving = false;
 
         this.speed = this.game.keys["shift"] ? 400 : 200;
-
+        let movex = 0
+        let movey = 0
         if (this.game.keys["w"] || this.game.keys["ArrowUp"]) {
-            this.y -= this.speed * this.game.clockTick;
+            movey = -(this.speed * this.game.clockTick);
             this.animation = "up";
             moving = true;
         }
         if (this.game.keys["s"] || this.game.keys["ArrowDown"]) {
-            this.y += this.speed * this.game.clockTick;
+            movey = this.speed * this.game.clockTick;
             this.animation = "down";
             moving = true;
         }
         if (this.game.keys["a"] || this.game.keys["ArrowLeft"]) {
-            this.x -= this.speed * this.game.clockTick;
+            movex = -(this.speed * this.game.clockTick);
             this.animation = "left";
             moving = true;
         }
         if (this.game.keys["d"] || this.game.keys["ArrowRight"]) {
-            this.x += this.speed * this.game.clockTick;
+            movex = this.speed * this.game.clockTick;
             this.animation = "right";
             moving = true;
         } 
         if (!moving) {
             this.animation = "idle";
+        }
+
+        //check for bounds to not allow the player to leave the bounding area
+        if (0 <= this.x + movex && this.x + movex <= 940) {
+            this.x += movex;
+            console.log(this.x);
+        }
+        if (0 <= this.y + movey && this.y + movey <= 670) {
+            this.y += movey;
         }
     }
 
